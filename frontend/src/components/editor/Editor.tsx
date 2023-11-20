@@ -6,13 +6,14 @@ import {
 } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { codeBlockSchema, insertCodeBlock } from "./blocks/Codeblock";
+import { dividerBlockSchema, insertDividerBlock } from "./blocks/Dividerblock";
 import { uploadFile } from "./firebase/Firebase";
 
 const Editor = () => {
   // Creates a new editor instance.
   const editor = useBlockNote({
-    blockSchema: { ...defaultBlockSchema, ...codeBlockSchema },
-    slashMenuItems: [...getDefaultReactSlashMenuItems(), insertCodeBlock],
+    blockSchema: { ...defaultBlockSchema, ...codeBlockSchema, ...dividerBlockSchema },
+    slashMenuItems: [...getDefaultReactSlashMenuItems(), insertCodeBlock, insertDividerBlock],
     uploadFile: uploadFile,
   });
 
