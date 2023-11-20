@@ -1,4 +1,4 @@
-import { BlockSchema } from "@blocknote/core";
+import { BlockSchema, StyledText } from "@blocknote/core";
 import {
   createReactBlockSpec,
   InlineContent,
@@ -14,12 +14,12 @@ const codeBlock = createReactBlockSpec({
   propSchema: {
     language: {
       default: "ts",
-    },
+    }, 
   },
-  containsInlineContent: false,
+  containsInlineContent: true,
 
   render: ({ block }) => {
-    const [code, setCode] = useState("");
+    const [code, setCode] = useState(block.content.map((c) => (c as StyledText).text).join("\n"));
     const copyToClipboard = () => {
       navigator.clipboard.writeText(code);
     };
@@ -61,6 +61,8 @@ export const codeBlockSchema = {
   codeblock: codeBlock,
 } satisfies BlockSchema;
 
+export const CodeblockIcon = RiCodeFill;
+
 export const insertCodeBlock: ReactSlashMenuItem<typeof codeBlockSchema> = {
   name: "Insert Code Block",
   execute: (editor) => {
@@ -79,7 +81,7 @@ export const insertCodeBlock: ReactSlashMenuItem<typeof codeBlockSchema> = {
   },
   aliases: ["codeblock"],
   group: "Basic blocks",
-  icon: <RiCodeFill />,
+  icon: <CodeblockIcon />,
   hint: "Insert a code block",
   shortcut: "crtl+alt+c",
 };

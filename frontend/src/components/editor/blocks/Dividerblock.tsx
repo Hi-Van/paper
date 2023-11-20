@@ -1,7 +1,6 @@
 import { BlockSchema } from "@blocknote/core";
 import { createReactBlockSpec, ReactSlashMenuItem } from "@blocknote/react";
-import { RiEqualFill } from "react-icons/ri";
-import { IoClipboardOutline } from "react-icons/io5";
+import { RiSubtractFill } from "react-icons/ri";
 
 const Divider = createReactBlockSpec({
   type: "divider",
@@ -19,6 +18,8 @@ export const dividerBlockSchema = {
   divider: Divider,
 } satisfies BlockSchema;
 
+export const DividerIcon = RiSubtractFill;
+
 export const insertDividerBlock: ReactSlashMenuItem<typeof dividerBlockSchema> = {
   name: "Insert Divider",
   execute: (editor) => {
@@ -33,8 +34,8 @@ export const insertDividerBlock: ReactSlashMenuItem<typeof dividerBlockSchema> =
     );
   },
   aliases: ["divider"],
-  group: "Basic blocks",
-  icon: <RiEqualFill />,
+  group: "Formatting and layout",
+  icon: <DividerIcon />,
   hint: "Insert a divider",
   shortcut: "crtl+alt+d",
 };
